@@ -92,7 +92,7 @@
             </div>
         </div>
 
-        @if ($laundryService)
+        @if ($laundryService && $amount)
         <div class="mb-3 row">
             <x-input-label for="Total" :value="__('Total')" />
             <div class="col-md-10">
