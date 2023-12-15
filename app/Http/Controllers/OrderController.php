@@ -28,6 +28,8 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $data = Order::with('customer')
+            ->whereHas('laundryService')
+            ->whereHas('customer')
             ->when($request->has('search'), function ($q) use ($request) {
                 $q->whereHas('customer', function ($subQ) use ($request) {
                     $subQ->where('name', 'like', '%' . $request->input('search') . '%')
