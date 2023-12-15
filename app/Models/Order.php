@@ -26,6 +26,7 @@ class Order extends Model
         'payment_status',
         'payment_at',
         'order_status',
+        'order_status',
         'taken_at',
     ];
 

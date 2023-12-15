@@ -7,6 +7,7 @@ use App\Http\Controllers\LaundryServiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\TrackingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,8 @@ Route::get('/', function () {
     return redirect()->route('login');
 })->name('home');
 
+Route::get('/tracking', [TrackingController::class, 'index'])->name('tracking');
+
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -33,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/laundry-service', LaundryServiceController::class);
 
     Route::get('/oroder/{order}/print', [OrderController::class, 'print'])->name('order.print');
+    Route::post('/oroder/{order}/cancel', [OrderController::class, 'cancel'])->name('order.cancel');
     Route::resource('/order', OrderController::class);
 });
 

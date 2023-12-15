@@ -55,20 +55,26 @@
                             <td>{{ $item->payment_at ?? '-' }}</td>
                             <td>
                                 @if ($item->order_status == 'taken')
-                                    <x-success-badge>Already Taken</x-success-badge>
+                                    <x-success-badge>{{ __('Already Taken') }}</x-success-badge>
                                 @elseif($item->order_status == 'ready')
-                                    <x-warning-badge>Ready to be taken</x-warning-badge>
+                                    <x-warning-badge>{{ __('Ready to be taken') }}</x-warning-badge>
+                                @elseif($item->order_status == 'cancel')
+                                    <x-danger-badge>{{ __('Canceled') }}</x-danger-badge>
                                 @else
-                                    <x-info-badge>Process</x-info-badge>
+                                    <x-info-badge>{{ __('Process') }}</x-info-badge>
                                 @endif
                             </td>
                             <td>{{ $item->taken_at ?? '-' }}</td>
                             @role('staff')
                             <td>
+                                @if ($item->order_status == 'cancel')
+                                <x-action printRoute="{{ route('order.print', $item->id) }}"/>
+                                @else
                                 <x-action
                                     printRoute="{{ route('order.print', $item->id) }}"
                                     editRoute="{{ route('order.edit', $item->id) }}"
-                                    deleteRoute="{{ route('order.destroy', $item->id) }}"/>
+                                    cancelRoute="{{ route('order.cancel', $item->id) }}"/>
+                                @endif
                             </td>
                             @endrole
                         </tr>
@@ -85,4 +91,46 @@
             {!! $data->links() !!}
         </div>
     </div>
+
+    <div class="modal" id="modal-form" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form action="" method="post">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ __('Cancel') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="form-group">
+                          <textarea class="form-control @error('cancel_reason') is-invalid @enderror"
+                              placeholder="{{ __('Enter') . ' ' . __('Cancel Reason') }}" name="cancel_reason" id="cancel_reason" cols="5"
+                              rows="3" required></textarea>
+                          <x-input-error :messages="$errors->get('cancel_reason')" class="mt-2" />
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">{{ __('Cancel Order') }}</button>
+                  </div>
+            </form>
+          </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" charset="utf-8">
+        function showModalForm(url, title = 'Tambah', modal = '#modal-form', func) {
+            $(`${modal}`).modal('show');
+            $(`${modal} .modal-title`).text(title);
+            $(`${modal} form`).attr('action', url);
+            $(`${modal} [name=_method]`).val('post');
+
+            resetForm(`${modal} form`);
+
+
+            if (func != undefined) {
+                func();
+            }
+        };
+    </script>
 </x-app-layout>
+

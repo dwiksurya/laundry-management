@@ -87,6 +87,8 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
+        abort_if($order->order_status == 'cancel', 404);
+
         return view('order.process', compact('order'));
     }
 
@@ -122,8 +124,33 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    public function cancel(Order $order)
+    {
+        DB::beginTransaction();
+        try {
+
+            $order->update([
+                'order_status' => 'cancel'
+            ]);
+
+            DB::commit();
+            return back()
+                ->with(['success' => 'Sukses, Paket Laundry berhasil dibatalkan']);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            return back()
+                ->with(['success' => 'Gagal, Paket Laundry gagal dibatalkan']);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(Order $order)
     {
+        abort(404);
+
         DB::beginTransaction();
         try {
 

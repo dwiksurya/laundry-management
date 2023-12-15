@@ -19,6 +19,16 @@ class Customer extends Model
     ];
 
     /**
+     * Relasi ke tabel orders
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'customer_id');
+    }
+
+    /**
      * The "booting" method of the model.
      *
      * @return void

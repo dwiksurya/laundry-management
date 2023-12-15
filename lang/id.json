@@ -29,8 +29,9 @@
     "Address" : "Alamat",
     "Branch Name" : "Nama Cabang",
     "Enter" : "Ketik",
-    "Save" : "Simpan"
-
-
-
+    "Save" : "Simpan",
+    "Today’s Sales" : "Transaksi Hari ini",
+    "Today’s Income" : "Pendapatan Hari ini",
+    "Welcome back": "Selamat datang kembali",
+    "Total Customers" : "Jumalah Pelanggan"
 }

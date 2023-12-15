@@ -19,6 +19,16 @@ class LaundryService extends Model
     ];
 
     /**
+     * Relasi ke tabel orders
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'laundry_service_id', 'id');
+    }
+
+    /**
      * The "booting" method of the model.
      *
      * @return void

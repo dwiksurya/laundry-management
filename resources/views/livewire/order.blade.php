@@ -48,7 +48,7 @@
             <div class="col-md-10">
                 <input class="form-control @error('orderDate') is-invalid @enderror" type="date"
                     wire:model.live="orderDate" id="orderDate" placeholder="{{ __('Enter') . ' ' . __('Order Date') }}"
-                    value="{{ $orderDate ?? date('Y-m-d', strtotime(now())) }}" />
+                    value="{{ $orderDate }}" />
                 <x-input-error :messages="$errors->get('orderDate')" class="mt-2" />
             </div>
         </div>

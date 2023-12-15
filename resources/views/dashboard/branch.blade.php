@@ -16,15 +16,21 @@
                             <div class="d-flex align-items-center">
                                 <div class="border-end pe-4 border-muted border-opacity-10">
                                     <h3 class="mb-1 fw-semibold fs-8 d-flex align-content-center">
-                                        {{ $totalActiveBranchs }}
+                                        {{ $todayOrders }}
                                     </h3>
-                                    <p class="mb-0 text-dark">{{ __('Active Branchs') }}</p>
+                                    <p class="mb-0 text-dark">{{ __('Today’s Sales') }}</p>
+                                </div>
+                                <div class="ps-4 border-end pe-4 border-muted border-opacity-10">
+                                    <h3 class="mb-1 fw-semibold fs-8 d-flex align-content-center">
+                                        {{ Number::currency($todayIncomes, 'IDR', 'id') }}
+                                    </h3>
+                                    <p class="mb-0 text-dark">{{ __('Today’s Income') }}</p>
                                 </div>
                                 <div class="ps-4">
                                     <h3 class="mb-1 fw-semibold fs-8 d-flex align-content-center">
-                                        {{ $totalInactiveBranchs }}
+                                        {{ $totalCustomers }}
                                     </h3>
-                                    <p class="mb-0 text-dark">{{ __('Inactive Branchs') }}</p>
+                                    <p class="mb-0 text-dark">{{ __('Total Customers') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -41,22 +47,24 @@
         <div class="col-md-6 col-lg-4 d-flex align-items-stretch">
             <div class="card w-100">
                 <div class="card-body">
-                    <h5 class="card-title fw-semibold">{{ __('Top Branches') }}</h5>
-                    <p class="card-subtitle mb-0">{{ __('Based number of transactions') }}</p>
+                    <h5 class="card-title fw-semibold">{{ __('Top Laundry Services') }}</h5>
+                    <p class="card-subtitle mb-0">{{ __('in 7 days') }}</p>
 
-                    @foreach ($topBranches as $item)
+                    @foreach ($topLaundryServices as $item)
                     <div class="position-relative mt-3">
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                            <div class="d-flex align-items-center">
-                                <div class="bg-primary-subtle text-primary badge me-6">
-                                    <p class="fs-3 fw-semibold mb-0">{{ $loop->iteration }}</p>
+                            <div class="d-flex">
+                                <div
+                                    class="p-6 bg-primary-subtle text-primary rounded-2 me-6 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-grid-dots fs-6"></i>
                                 </div>
                                 <div>
                                     <h6 class="mb-1 fs-4 fw-semibold">{{ $item->name }}</h6>
+                                    <p class="fs-3 mb-0">{{ $item->type }}</p>
                                 </div>
                             </div>
                             <div class="bg-primary-subtle text-primary badge">
-                                <p class="fs-3 fw-semibold mb-0">{{ $item->customers_count }} {{ __('Order') }}</p>
+                                <p class="fs-3 fw-semibold mb-0">{{ $item->orders_count }}</p>
                             </div>
                         </div>
                     </div>

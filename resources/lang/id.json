@@ -29,5 +29,20 @@
     "Address" : "Alamat",
     "Branch Name" : "Nama Cabang",
     "Enter" : "Ketik",
-    "Save" : "Simpan"
+    "Save" : "Simpan",
+    "Today’s Sales" : "Transaksi Hari ini",
+    "Today’s Income" : "Pendapatan Hari ini",
+    "Welcome back": "Selamat datang kembali",
+    "Total Customers" : "Jumlah Pelanggan",
+    "Top Laundry Services" : "Paket Laundry Terlaku",
+    "in 7 days": "dalam 7 hari",
+    "Active Branchs": "Cabang Aktif",
+    "Inactive Branchs": "Cabang Tidak Aktif",
+    "Based number of transactions": "Berdasarkan jumlah transaksi",
+    "Top Branches" : "Cabang Terlaku",
+    "Order code not found!": "Kode transaksi tidak ditemukan",
+    "Process": "Sedang diproses",
+    "Ready to be taken": "Siap untuk diambil",
+    "Taken": "Sudah diambil",
+    "Finished": "Selesai"
 }
